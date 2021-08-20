@@ -7,6 +7,7 @@ require '../models/appointment.php';
 $regexMail = '/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/';
 $regexName = '/^[a-zA-Z]+$/';
 $regexTel = '/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/';
+$regexDate = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
 
 //instance for liste-patient.php from dbh
 $patientListObj = new Patients();
@@ -109,7 +110,7 @@ if (isset($_POST['update-patient'])) {
     };
 
     //push in dbh
-    var_dump($errorArray);
+    // var_dump($errorArray);
     if (empty($errorArray)) {
         $patientObj = new Patients();
         $updatePatient = $patientObj->updatePatient($firstname, $lastname, $birthdate, $phone, $email, $id);

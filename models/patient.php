@@ -41,7 +41,6 @@ class Patients extends Database
 
     public function updatePatient($firstname, $lastname, $birthdate, $phone, $email, $id)
     {
-        var_dump($firstname, $lastname, $birthdate, $phone, $email, $id);
         $dbh =  $this->connectDatabase();
         $req = $dbh->prepare("update patients set firstname = :firstname, lastname = :lastname, birthdate = :birthdate, phone = :phone, mail = :email where id = :id");
 
