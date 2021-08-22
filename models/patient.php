@@ -9,6 +9,13 @@ class Patients extends Database
     private $phone;
     private $id;
 
+    
+
+    /**
+     * show full patient list from database
+     *
+     * @return SQL request
+     */
     public function showPatient()
     {
         $dbh =  $this->connectDatabase();
@@ -16,6 +23,16 @@ class Patients extends Database
         return $fetch;
     }
 
+    /**
+     * insert a new patient into dbh
+     *
+     * @param str $firstname
+     * @param str $lastname
+     * @param str $birthdate
+     * @param str $phone
+     * @param str $email
+     * @return void
+     */
     public function insertPatient($firstname, $lastname, $birthdate, $phone, $email)
     {
         $dbh =  $this->connectDatabase();
@@ -29,16 +46,30 @@ class Patients extends Database
         $req->execute();
     }
 
+    /**
+     * show a patient from dbh with it's id ref
+     *
+     * @param int $id
+     * @return void
+     */
     public function showPatientById($id)
     {
         $dbh =  $this->connectDatabase();
         $fetch = $dbh->query("select * from patients where id ={$id};")->fetch(PDO::FETCH_ASSOC);
         return $fetch;
-        // $dbh =  $this->connectDatabase();
-        // $req = $dbh->prepare("select * from patients where id =?");
-        // $req->execute(array($id));
     }
 
+    /**
+     * function to update the patient data into dbh
+     *
+     * @param str $firstname
+     * @param str $lastname
+     * @param str $birthdate
+     * @param str $phone
+     * @param str $email
+     * @param int $id
+     * @return void
+     */
     public function updatePatient($firstname, $lastname, $birthdate, $phone, $email, $id)
     {
         $dbh =  $this->connectDatabase();
