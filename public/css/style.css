@@ -1,3 +1,7 @@
 .background {
     background-image: url(../img/fond-patient.jpg);
+    background-size: cover;
+}
+a {
+    text-decoration: none !important;
 }

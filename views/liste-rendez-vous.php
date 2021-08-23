@@ -1,5 +1,6 @@
 <?php
-require '../controllers/controller.php'
+require '../controllers/controller.php';
+require '../controllers/controller-rdv.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,38 +16,40 @@ require '../controllers/controller.php'
 </head>
 
 <body class="background">
-    <h1 class="text-center my-5">LISTE DES PATIENTS</h1>
+    <h1 class="text-center my-5">LISTE DES RENDEZ-VOUS</h1>
     <div class="container-fluid">
-        <table class="table table-striped table-hover ">
+        <table class="table table-striped table-hover bg-light">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col" class="text-center">Nom</th>
                     <th scope="col" class="text-center">Prénom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col" class="text-center">Fiche</th>
+                    <th scope="col" class="text-center">Téléphone</th>
+                    <th scope="col" class="text-center">Details Rendez-vous</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($patientListObj->showPatient() as $patienList): ?>
+                foreach ($appointmentListAll as $appointmentList) :
+                ?>
                     <tr>
-                        <td scope="row"> <?= $patienList['id'] ?></td>
-                        <td class="text-center"><?= $patienList['firstname'] ?></td>
-                        <td class="text-center"><?= $patienList['lastname'] ?></td>
-                        <td> <?= $patienList['mail'] ?></td>
+                        <td scope="row"> <?= $appointmentList['id'] ?></td>
+                        <td class="text-center"><?= $appointmentList['firstname'] ?></td>
+                        <td class="text-center"><?= $appointmentList['lastname'] ?></td>
+                        <td class="text-center"> <?= $appointmentList['dateHour'] ?></td>
                         <td class="text-center">
-                            <form action="./profil-patient.php" method="post">
-                                <button type="submit" name="id" value="<?= $patienList['id'] ?>" class="btn btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <form action="./rendez-vous.php" method="post">
+                                <button type="submit" name="btn-show-appointment" value="<?= $appointmentList['id'] ?>" class="btn btn-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
                                     </svg> Consulter
                                 </button>
                             </form>
                         </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
-
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-auto">
@@ -57,10 +60,10 @@ require '../controllers/controller.php'
                         </a>
                     </div>
                     <div class="col-auto">
-                        <a href="./ajout-patient.php"><button type="button" class="btn btn-success ndary mx-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                        <a href="./ajout-rendez-vous.php"><button type="button" class="btn btn-success ndary mx-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
                                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                                     <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                </svg> Ajouter un patient
+                                </svg> Ajouter un RDV
                             </button>
                         </a>
                     </div>
@@ -68,8 +71,6 @@ require '../controllers/controller.php'
             </div>
         </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

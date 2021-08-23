@@ -9,8 +9,6 @@ class Patients extends Database
     private $phone;
     private $id;
 
-    
-
     /**
      * show full patient list from database
      *
@@ -31,7 +29,7 @@ class Patients extends Database
      * @param str $birthdate
      * @param str $phone
      * @param str $email
-     * @return void
+     * @return SQL
      */
     public function insertPatient($firstname, $lastname, $birthdate, $phone, $email)
     {
@@ -50,7 +48,7 @@ class Patients extends Database
      * show a patient from dbh with it's id ref
      *
      * @param int $id
-     * @return void
+     * @return SQL
      */
     public function showPatientById($id)
     {
@@ -68,7 +66,7 @@ class Patients extends Database
      * @param str $phone
      * @param str $email
      * @param int $id
-     * @return void
+     * @return SQL
      */
     public function updatePatient($firstname, $lastname, $birthdate, $phone, $email, $id)
     {
@@ -81,7 +79,6 @@ class Patients extends Database
         $req->bindValue(':phone', $phone, PDO::PARAM_STR);
         $req->bindValue(':email', $email, PDO::PARAM_STR);
         $req->bindValue(':id', $id, PDO::PARAM_STR);
-
         $req->execute();
     }
 
