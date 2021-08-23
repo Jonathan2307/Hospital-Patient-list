@@ -23,7 +23,7 @@ require '../controllers/controller-rdv.php';
                 <option value="">Liste des patients</option>
                 <?php
                 foreach ($list as $listDetails) : ?>
-                    <option class="form-label" value="<?= $listDetails['id']; ?>"><?= $listDetails['firstname'] . ' ' . $listDetails['lastname']; ?></option>
+                    <option class="form-label" value="<?= $listDetails['id']; ?>"><?= $listDetails['firstname'] . ' ' . $listDetails['lastname'] ?? null  ?></option>
                 <?php endforeach; ?>
             </select>
             <div>

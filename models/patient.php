@@ -10,6 +10,25 @@ class Patients extends Database
     private $id;
 
     /**
+     * function which show
+     *
+     * @param [type] $idPatient
+     * @return void
+     */
+    public function showAppointmentByPatient($idPatient)
+    {
+        $dbh =  $this->connectDatabase();
+        $fetch = $dbh->query("SELECT 
+        appointments.id as appointment_ID,
+        appointments.dateHour as appointment_dateHour,
+        appointments.idPatients as patient_ID,
+        patients.firstname,
+        patients.lastname 
+        FROM hospitalE2N.appointments INNER JOIN  patients ON appointments.idPatients = patients.id where idPatients = {$idPatient};")->fetch(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+    /**
      * show full patient list from database
      *
      * @return SQL request

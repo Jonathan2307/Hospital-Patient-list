@@ -10,8 +10,8 @@ class Appointment extends Database
     /**
      * update the appointment in dbh
      *
-     * @param int $dateHour
-     * @param int $id
+     * @param str $dateHour
+     * @param str $id
      * @return fetch
      */
     public function updateAppointment($dateHour, $id)
@@ -45,7 +45,6 @@ class Appointment extends Database
         patients.lastname 
         FROM hospitalE2N.appointments INNER JOIN  patients ON appointments.idPatients = patients.id where appointments.id = {$idAppointment};")->fetch(PDO::FETCH_ASSOC);
         return $fetch;
-    
     }
 
 

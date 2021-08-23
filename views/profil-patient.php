@@ -1,7 +1,7 @@
 <?php
-
 require '../controllers/controller.php';
 $patientById = $patientListObj->showPatientById($_POST['id']);
+
 ?>
 
 <!DOCTYPE html>

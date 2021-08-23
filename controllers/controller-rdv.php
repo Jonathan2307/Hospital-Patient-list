@@ -10,12 +10,12 @@ if (isset($_POST['appointment']) && $_POST['idPatient'] > 0) {
     
 } 
 
+//update-rendez-vous.php controller
 if (isset($_POST['update-rdv'])) {
     $dateHour = $_POST['dateHour'];
     $id = $_POST['update-rdv'];
     $updateAppointment = $appointmentListObj->updateAppointment($dateHour, $id);
-
-}
+} 
 
 if(isset($_POST['btn-show-appointment'])) {
     $appointmentObj = new Appointment();
