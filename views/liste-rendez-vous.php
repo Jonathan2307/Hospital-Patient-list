@@ -17,15 +17,14 @@ require '../controllers/controller-rdv.php';
 
 <body class="background">
     <h1 class="text-center my-5">LISTE DES RENDEZ-VOUS</h1>
-    <div class="container-fluid">
+    <div class="container-fluid col-8">
         <table class="table table-striped table-hover bg-light">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col" class="text-center">Nom</th>
                     <th scope="col" class="text-center">Prénom</th>
-                    <th scope="col" class="text-center">Téléphone</th>
-                    <th scope="col" class="text-center">Details Rendez-vous</th>
+                    <th scope="col" class="text-center">Date</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,25 +32,32 @@ require '../controllers/controller-rdv.php';
                 foreach ($appointmentListAll as $appointmentList) :
                 ?>
                     <tr>
-                        <td scope="row"> <?= $appointmentList['id'] ?? null ?></td>
                         <td class="text-center"><?= $appointmentList['firstname'] ?? null ?></td>
                         <td class="text-center"><?= $appointmentList['lastname'] ?? null ?></td>
                         <td class="text-center"> <?= $appointmentList['dateHour'] ?? null ?></td>
                         <td class="text-center">
-                            <form action="./rendez-vous.php" method="post">
-                                <button type="submit" name="btn-show-appointment" value="<?= $appointmentList['id'] ?? null ?>" class="btn btn-secondary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
-                                    </svg> Consulter
-                                </button>
-                            </form>
+                            <div class="d-flex justify-content-center">
+                                <form action="./rendez-vous.php" method="post" class="mx-1">
+                                    <button type="submit" name="btn-show-appointment" value="<?= $appointmentList['id'] ?? null ?>" class="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                                        </svg> Consulter
+                                    </button>
+                                </form>
+                                <form action="" method="post" class="mx-1">
+                                    <button type="submit" name="delete-appointment" value="<?= $appointmentList['id'] ?? null ?>" class="btn btn-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+                                            <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z" />
+                                        </svg> Supprimer
+                                    </button>
+                                </form>
+                            </div>
                         </td>
-
                     </tr>
                 <?php endforeach; ?>
             </tbody>
             <div class="container-fluid">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center my-2">
                     <div class="col-auto">
                         <a href="../index.php"><button type="button" class="btn btn-warning mx-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                                     <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />

@@ -6,6 +6,22 @@ class Appointment extends Database
     private $dateHour;
     private $idPatient;
 
+    /**
+     * function which allow to delete an appointment from dbh
+     *
+     * @param str $id
+     * @return SQL request
+     */
+    public function deleteAppointment($id)
+    {
+        $dbh =  $this->connectDatabase();
+        $req = $dbh->prepare('DELETE FROM 
+        hospitalE2N.appointments 
+        WHERE
+            id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_STR);
+        $req->execute();
+    }
 
     /**
      * update the appointment in dbh
@@ -139,7 +155,7 @@ class Appointment extends Database
 
     /**
      * Get the value of idAppointment
-     */ 
+     */
     public function getIdAppointment()
     {
         return $this->idAppointment;
@@ -149,7 +165,7 @@ class Appointment extends Database
      * Set the value of idAppointment
      *
      * @return  self
-     */ 
+     */
     public function setIdAppointment($idAppointment)
     {
         $this->idAppointment = $idAppointment;

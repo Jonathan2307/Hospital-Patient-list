@@ -30,3 +30,9 @@ if(isset($_POST['update-rdv-request'])) {
     $explode = explode(' ', $detailAppointmentArray['dateHour']);
     $newDateHour = $explode[0] . 'T' . $explode[1];
 }
+
+if(isset($_POST['delete-appointment'])) {
+    $appointmentObj = new Appointment();
+    $deleteAppointment = $appointmentObj->deleteAppointment($_POST['delete-appointment']);
+    header('Location: ./liste-rendez-vous.php');
+}
