@@ -12,8 +12,8 @@ class Patients extends Database
     /**
      * function which show
      *
-     * @param [type] $idPatient
-     * @return void
+     * @param str $idPatient
+     * @return SQL request
      */
     public function showAppointmentByPatient($idPatient)
     {
@@ -24,7 +24,7 @@ class Patients extends Database
         appointments.idPatients as patient_ID,
         patients.firstname,
         patients.lastname 
-        FROM hospitalE2N.appointments INNER JOIN  patients ON appointments.idPatients = patients.id where idPatients = {$idPatient};")->fetch(PDO::FETCH_ASSOC);
+        FROM hospitalE2N.appointments INNER JOIN  patients ON appointments.idPatients = patients.id where idPatients = {$idPatient};")->fetchAll(PDO::FETCH_ASSOC);
         return $fetch;
     }
 

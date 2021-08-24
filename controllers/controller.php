@@ -11,10 +11,12 @@ $regexDate = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
 
 //instance for liste-patient.php from dbh
 $patientListObj = new Patients();
+$allPatients = $patientListObj->showPatient();
+if(isset($_POST['id'])) {
+$patientById = $patientListObj->showPatientById($_POST['id']);
+$showAppointmentByPatient = $patientListObj->showAppointmentByPatient($_POST['id']);
 
-// if(isset($_POST['id'])) {
-// }
-
+} 
 //check for ajout-patient.php
 if (isset($_POST['add-patient'])) {
     //error management
@@ -123,7 +125,8 @@ if (isset($_POST['update-patient'])) {
     }
     }
 
-//check for profil-patient.php
+
+    //check for profil-patient.php
 if (isset($_POST['update-request'])) {
     $errorArray = array(); //for dbh insert
     $valid = array(); //for frontend BS
@@ -131,3 +134,4 @@ if (isset($_POST['update-request'])) {
     $patientObj = new Patients;
     $updatePatient = $patientObj->showPatientById($_POST['update-request']);
 }
+

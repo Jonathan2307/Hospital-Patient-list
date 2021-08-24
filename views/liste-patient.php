@@ -1,5 +1,6 @@
 <?php
-require '../controllers/controller.php'
+require '../controllers/controller.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +30,8 @@ require '../controllers/controller.php'
             </thead>
             <tbody>
                 <?php
-                foreach ($patientListObj->showPatient() as $patienList): ?>
+                foreach ($allPatients as $patienList) :
+                ?>
                     <tr>
                         <td scope="row"> <?= $patienList['id'] ?></td>
                         <td class="text-center"><?= $patienList['firstname'] ?></td>

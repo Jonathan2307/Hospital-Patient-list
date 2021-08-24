@@ -1,7 +1,5 @@
 <?php
 require '../controllers/controller.php';
-$patientById = $patientListObj->showPatientById($_POST['id']);
-
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +41,22 @@ $patientById = $patientListObj->showPatientById($_POST['id']);
                     <label for="exampleInputEmail1" class="form-label">Date de naissance</label>
                     <input class="form-control " type="text" name="birthdate" id="birthdate" value="<?= $patientById['birthdate'] ?? null ?>" disabled>
                 </div>
+                <ul>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Rendez-vous à venir</label>
+                        <?php if (!empty($showAppointmentByPatient)) : ?>
+                            <?php foreach ($showAppointmentByPatient as $rdv) : ?>
+                                <li>
+                                    <input class="form-control my-2" type="text" name="birthdate" id="birthdate" value="<?= $rdv['appointment_dateHour'] ?>" disabled>
+                                <?php endforeach ?>
+                                </li>
+                            <?php else : ?>
+                                <li>
+                                    <input class="form-control my-2" type="text" name="birthdate" id="birthdate" value="Aucun rendez-vous" disabled>
+                                </li>
+                            <?php endif ?>
+                    </div>
+                </ul>
                 <div class="text-center mb-3">
                     <a href="../index.php">
                         <button type="button" class="btn btn-warning">
