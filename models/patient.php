@@ -10,6 +10,39 @@ class Patients extends Database
     private $id;
 
     /**
+     * function that search in dbh the lastname starting by $string
+     *
+     * @param int $string
+     * @return fetch of dbh
+     */
+    public function searchPatient($string)
+    {
+        $dbh =  $this->connectDatabase();
+        $req = $dbh->prepare('SELECT 
+        *
+        FROM
+        hospitalE2N.patients
+        WHERE
+        lastname LIKE :string
+        ORDER BY lastname ASC');
+        $req->bindValue(':string', $string.'%', PDO::PARAM_STR);
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+    public function deletePatient($id)
+    {
+        $dbh =  $this->connectDatabase();
+        $req = $dbh->prepare('DELETE FROM 
+        hospitalE2N.patients 
+        WHERE
+            id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    /**
      * function which show
      *
      * @param str $idPatient

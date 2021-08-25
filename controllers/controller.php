@@ -11,12 +11,21 @@ $regexDate = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
 
 //instance for liste-patient.php from dbh
 $patientListObj = new Patients();
-$allPatients = $patientListObj->showPatient();
-if(isset($_POST['id'])) {
-$patientById = $patientListObj->showPatientById($_POST['id']);
-$showAppointmentByPatient = $patientListObj->showAppointmentByPatient($_POST['id']);
 
-} 
+if (isset($_POST['id'])) {
+    $patientById = $patientListObj->showPatientById($_POST['id']);
+    $showAppointmentByPatient = $patientListObj->showAppointmentByPatient($_POST['id']);
+}
+
+if(isset($_POST['search']) && !empty($_POST['search'])) {
+    $string = trim(htmlspecialchars($_POST['search']));
+    $patientObj = new Patients;
+    $allPatients = $patientObj->searchPatient($string);
+} else {
+    $allPatients = $patientListObj->showPatient();
+}
+
+
 //check for ajout-patient.php
 if (isset($_POST['add-patient'])) {
     //error management
@@ -123,15 +132,22 @@ if (isset($_POST['update-patient'])) {
         $patientObj = new Patients;
         $updatePatient = $patientObj->showPatientById($id);
     }
-    }
+}
 
 
-    //check for profil-patient.php
+//check for profil-patient.php
 if (isset($_POST['update-request'])) {
     $errorArray = array(); //for dbh insert
     $valid = array(); //for frontend BS
-    
+
     $patientObj = new Patients;
     $updatePatient = $patientObj->showPatientById($_POST['update-request']);
+}
+
+
+if (isset($_POST['deletePatient'])) {
+    $patientObj = new Patients;
+    $deletePatient = $patientObj->deletePatient($_POST['deletePatient']);
+    header('Location: liste-patient.php');
 }
 
