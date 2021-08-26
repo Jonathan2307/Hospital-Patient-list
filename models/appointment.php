@@ -75,8 +75,8 @@ class Appointment extends Database
     {
         $idPatient = intval($_POST['idPatient']);
         $dbh =  $this->connectDatabase();
-        $req = $dbh->prepare('INSERT INTO `appointments` (idPatients, dateHour) VALUES ( :idPatient, :dateHour)');
-        $req->bindValue(':idPatient', $idPatient, PDO::PARAM_INT);
+        $req = $dbh->prepare('INSERT INTO `appointments` (idPatients, dateHour) VALUES ( :idPatients, :dateHour)');
+        $req->bindValue(':idPatients', $idPatient, PDO::PARAM_INT);
         $req->bindValue(':dateHour', $dateHour, PDO::PARAM_STR);
         $req->execute();
     }

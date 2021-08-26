@@ -17,13 +17,26 @@ if (isset($_POST['id'])) {
     $showAppointmentByPatient = $patientListObj->showAppointmentByPatient($_POST['id']);
 }
 
-if(isset($_POST['search']) && !empty($_POST['search'])) {
+if (isset($_POST['search']) && !empty($_POST['search'])) {
     $string = trim(htmlspecialchars($_POST['search']));
     $patientObj = new Patients;
     $allPatients = $patientObj->searchPatient($string);
 } else {
     $allPatients = $patientListObj->showPatient();
 }
+
+//pagination
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $currentPage = (int) strip_tags($_GET['page']);
+} else {
+    $currentPage = 1;
+}
+$totalUser = $patientListObj->totalUsers();
+$byPages = 7;
+$pages = ceil($totalUser / $byPages);
+$first = ($currentPage * $byPages) - $byPages;
+$pagesFilter = $patientListObj->usersByPage($first, $byPages);
+
 
 
 //check for ajout-patient.php
@@ -151,3 +164,13 @@ if (isset($_POST['deletePatient'])) {
     header('Location: liste-patient.php');
 }
 
+if(isset($_POST['add-patient-appointment'])) {
+    var_dump($_POST);
+    $newPatient = $patientListObj->insertPatient($_POST['firstname'], $_POST['lastname'], $_POST['birthdate'], $_POST['phone'], $_POST['email']);
+    
+    $patientID = $patientListObj->returnID();
+    var_dump($patientID['id_Patient']);
+    
+    $newPatientAppointment = $patientListObj->pushAppointment($patientID['id_Patient'], $_POST['dateHour']);
+    var_dump($newPatientAppointment);
+}

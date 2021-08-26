@@ -9,6 +9,75 @@ class Patients extends Database
     private $phone;
     private $id;
 
+
+    public function returnID()
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare('SELECT 
+        id as id_Patient
+        FROM
+        `patients`
+        ORDER BY id DESC LIMIT 0,1');
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+    /**
+     * pushing appointment into database
+     *
+     * @param int $idPatient
+     * @param str $dateHour
+     * @return void
+     */
+    public function pushAppointment($idPatient, $dateHour)
+    {
+        $dbh =  $this->connectDatabase();
+        $req = $dbh->prepare('INSERT INTO `appointments` (idPatients, dateHour) VALUES ( :idPatient, :dateHour)');
+        $req->bindValue(':idPatient', $idPatient, PDO::PARAM_INT);
+        $req->bindValue(':dateHour', $dateHour, PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    /**
+     * function to show user in pagination
+     *
+     * @param int $first
+     * @param int $byPage
+     * @return fetch
+     */
+    public function usersByPage($first, $byPage)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare('SELECT * 
+        FROM `patients` 
+        order by `id` 
+        asc limit :first ,:byPage');
+        $req->bindValue(':first', $first, PDO::PARAM_INT);
+        $req->bindValue(':byPage', $byPage, PDO::PARAM_INT);
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+
+    /**
+     * function to count the users in dbh
+     *
+     * @return int 
+     */
+    public function totalUsers()
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare('SELECT 
+        COUNT(*) AS nb_patients 
+        FROM `patients`');
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
+        return (int)$fetch['nb_patients'];
+    }
+
+
     /**
      * function that search in dbh the lastname starting by $string
      *
@@ -25,7 +94,7 @@ class Patients extends Database
         WHERE
         lastname LIKE :string
         ORDER BY lastname ASC');
-        $req->bindValue(':string', $string.'%', PDO::PARAM_STR);
+        $req->bindValue(':string', $string . '%', PDO::PARAM_STR);
         $req->execute();
         $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
         return $fetch;
