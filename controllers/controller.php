@@ -12,11 +12,19 @@ $regexDate = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
 //instance for liste-patient.php from dbh
 $patientListObj = new Patients();
 
+//liste-patient.php controls
 if (isset($_POST['id'])) {
     $patientById = $patientListObj->showPatientById($_POST['id']);
     $showAppointmentByPatient = $patientListObj->showAppointmentByPatient($_POST['id']);
 }
+if (isset($_POST['deletePatient'])) {
+    $patientObj = new Patients;
+    $deletePatient = $patientObj->deletePatient($_POST['deletePatient']);
+    header('Location: liste-patient.php');
+}
 
+
+//index.php controls
 if (isset($_POST['search']) && !empty($_POST['search'])) {
     $string = trim(htmlspecialchars($_POST['search']));
     $patientObj = new Patients;
@@ -39,7 +47,7 @@ $pagesFilter = $patientListObj->usersByPage($first, $byPages);
 
 
 
-//check for ajout-patient.php
+//ajout-patient.php controls
 if (isset($_POST['add-patient'])) {
     //error management
     $errorArray = array(); //for dbh insert
@@ -92,7 +100,7 @@ if (isset($_POST['add-patient'])) {
     }
 };
 
-//check for update-profil-patient.php
+//update-profil-patient.php controls
 if (isset($_POST['update-patient'])) {
     $errorArray = array(); //for dbh insert
     $valid = array(); //for frontend BS
@@ -148,7 +156,7 @@ if (isset($_POST['update-patient'])) {
 }
 
 
-//check for profil-patient.php
+//profil-patient.php controls
 if (isset($_POST['update-request'])) {
     $errorArray = array(); //for dbh insert
     $valid = array(); //for frontend BS
@@ -158,19 +166,14 @@ if (isset($_POST['update-request'])) {
 }
 
 
-if (isset($_POST['deletePatient'])) {
-    $patientObj = new Patients;
-    $deletePatient = $patientObj->deletePatient($_POST['deletePatient']);
-    header('Location: liste-patient.php');
-}
-
+//ajout-patient-rendez-vous.php controls
 if(isset($_POST['add-patient-appointment'])) {
-    var_dump($_POST);
+    //creating a new patient
     $newPatient = $patientListObj->insertPatient($_POST['firstname'], $_POST['lastname'], $_POST['birthdate'], $_POST['phone'], $_POST['email']);
     
+    //bring it's id from dbh
     $patientID = $patientListObj->returnID();
-    var_dump($patientID['id_Patient']);
     
+    //create a new appointment with
     $newPatientAppointment = $patientListObj->pushAppointment($patientID['id_Patient'], $_POST['dateHour']);
-    var_dump($newPatientAppointment);
 }
