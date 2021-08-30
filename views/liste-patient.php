@@ -16,7 +16,7 @@ require '../controllers/controller.php';
 
 <body class="background">
     <h1 class="text-center my-5">LISTE DES PATIENTS</h1>
-    <div class="w-25 mx-auto" >
+    <div class="w-25 mx-auto">
         <div class="d-flex justify-content-center">
             <form action="" method="post" class="input-group">
                 <div class="input-group">
@@ -30,7 +30,7 @@ require '../controllers/controller.php';
             </form>
         </div>
     </div>
-    <div class="col-4 mx-1 mb-1">
+    <div class="col-4 d-flex flex-row-reverse mb-2">
         <a href="../index.php"><button type="button" class="btn btn-warning mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                     <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
@@ -40,7 +40,7 @@ require '../controllers/controller.php';
     </div>
     </div>
     <div class="container-fluid">
-        <div class="col-6 mx-auto">
+        <div class="w-50 mx-auto">
             <table class="table table-striped table-hover bg-light">
                 <thead>
                     <tr>
@@ -99,7 +99,9 @@ require '../controllers/controller.php';
                 <ul class="pagination ">
                     <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a href="liste-patient.php?page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
+                        <a href="liste-patient.php?page=<?= $currentPage - 1 ?>" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                            </svg></a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
@@ -109,7 +111,9 @@ require '../controllers/controller.php';
                     <?php endfor ?>
                     <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a href="liste-patient.php?page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
+                        <a href="liste-patient.php?page=<?= $currentPage + 1 ?>" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                            </svg></a>
                     </li>
                 </ul>
             </nav>

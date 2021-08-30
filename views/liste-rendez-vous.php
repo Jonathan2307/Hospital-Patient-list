@@ -17,7 +17,7 @@ require '../controllers/controller-rdv.php';
 
 <body class="background">
     <h1 class="text-center my-5">LISTE DES RENDEZ-VOUS</h1>
-    <div class="container-fluid col-8">
+    <div class="container-fluid w-50 mx-auto">
         <table class="table table-striped table-hover bg-light">
             <thead>
                 <tr>

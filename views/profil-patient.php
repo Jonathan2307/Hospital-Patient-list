@@ -18,7 +18,7 @@ require '../controllers/controller.php';
 
     <h1 class="text-center my-5">DETAILS PATIENT</h1>
 
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <div class="row justify-content-center">
             <form class="col-4" action="update-profil-patient.php" method="post">
                 <div class="mb-3">
